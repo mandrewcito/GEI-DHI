@@ -74,7 +74,7 @@ void loop() {
         horaE[0]=str.charAt(0);horaE[1]=str.charAt(1);minutoE[0]=str.charAt(3);minutoE[1]=str.charAt(4);segundoE[0]=str.charAt(6);segundoE[1]=str.charAt(7);
         if(atoi(horaE)>23 || atoi(minutoE)>59 ||atoi(segundoE)>59){
           Serial.println("paso a modo power-down");
-          delay(30);
+          Serial.flush();
           digitalWrite(rojo, LOW);
           digitalWrite(verde, LOW);
           attachInterrupt(1, wakeUpNow, HIGH);
