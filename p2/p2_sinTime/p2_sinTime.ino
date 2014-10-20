@@ -22,6 +22,7 @@ String str="";
 volatile int hora=0;
 volatile int minuto=0;
 volatile int segundo=0;
+volatile int darHora=HIGH;
 char horaE[3];
 char minutoE[3];
 char segundoE[3];
@@ -42,12 +43,7 @@ void flash() {
      }
   }
   }
-  Serial.print(hora);
-  Serial.print(":");
-  Serial.print(minuto);
-  Serial.print(":");
-  Serial.print(segundo);
-  Serial.print("\n"); 
+  darHora=HIGH;
 }
 
 void setup() {
@@ -89,5 +85,14 @@ void loop() {
           minuto=atoi(minutoE);
           segundo=atoi(segundoE);
         }
+    }
+    if (darHora){
+  Serial.print(hora);
+  Serial.print(":");
+  Serial.print(minuto);
+  Serial.print(":");
+  Serial.print(segundo);
+  Serial.print("\n"); 
+    darHora=LOW;
     }
 }
