@@ -1,14 +1,10 @@
-/*
-bajar libreria timer 2 ! 
- 
- */
 const int buttonPin =3 ;
 const int verde =5;
 const int rojo = 10;
 volatile int estado = 0;
 int buttonState=0;
 unsigned long time;
-unsigned long time2;
+volatile unsigned long time2;
 unsigned long timeResult;
 void setup(){
   //start serial connection
@@ -20,8 +16,12 @@ void setup(){
 }
 
 void detector(){
-if(digitalRead(buttonPin)== HIGH)
-  estado=1;
+  if(digitalRead(buttonPin)== HIGH)
+    estado=1;
+}
+void getTime(){
+  if(digitalRead(buttonPin)== HIGH)
+    time2= millis();
 }
 
 void loop(){
@@ -31,33 +31,40 @@ void loop(){
   while (digitalRead(buttonPin)== LOW);
   digitalWrite(verde, LOW);
   digitalWrite(rojo, LOW);
-  attachInterrupt(1,detector,CHANGE);
-  delay(random(400));
+  attachInterrupt(1,detector,RISING);
   estado = 0;
-  delay(random(400,800));
+  delay(400);
+  delay(random(0,800));
   detachInterrupt(1);
   if(estado==HIGH){
     Serial.print("NO SE PRECIPITE. Intente de nuevo \n");
-  }else{
+  }
+  else{
+    time=0;
+    time2=0;
     Serial.print("empieza el juego \n"); 
     digitalWrite(rojo, HIGH);
     time = millis();
-    while (digitalRead(buttonPin)== LOW);
-    time2= millis();
+    attachInterrupt(1,getTime,RISING);
+    while (time2==0);
+    detachInterrupt(1);
     timeResult=time2-time;
     Serial.print(timeResult);
     if(timeResult<100)
     {
       Serial.print("ms ENHORABUENA Excelentes reflejos\n");
-    }else if(timeResult>200){
+    }
+    else if(timeResult>200){
       Serial.print("ms Intente de nuevo \n");
-    }else{
+    }
+    else{
       Serial.print("ms BIEN, buenos reflejos \n");
     }
 
   }
-   delay(2000);
+  delay(2000);
 }
+
 
 
 
