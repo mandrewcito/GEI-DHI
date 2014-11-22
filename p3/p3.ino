@@ -50,9 +50,7 @@ vuelta(T2);
 vuelta(T3);
 vuelta(T3);
 }
-void flash() {
 
-}
 void rellenaLcd(){
 lcd.clear();
 lcd.setCursor(0,0);
