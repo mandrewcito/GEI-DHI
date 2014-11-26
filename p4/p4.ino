@@ -72,18 +72,13 @@ analogWrite(L1,brillos[0]);
 analogWrite(L2,brillos[1]);
 analogWrite(L3,brillos[2]);
 analogWrite(L4,brillos[3]);
-
 }
 
 void setup() {
   Serial.begin(9600);
-  pinMode(buttonPin, INPUT);
-  pinMode(L1,OUTPUT);
-  pinMode(L2,OUTPUT);
-  pinMode(L3,OUTPUT);
-  pinMode(L4,OUTPUT);
+  pinMode(buttonPin, INPUT);s
   lcd.begin(16,2);
-  MsTimer2::set(250, flash); // 1000ms period
+  MsTimer2::set(250, flash); // ms period
   MsTimer2::start();
   rellenaLcd();
   luces();
